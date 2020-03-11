@@ -25,16 +25,31 @@ const Characters = [
     attackPower: 6,
     counterAttackPower: 12,
     healthPoints: 120
+  },
+  {
+    name: "Darth Vader",
+    attackPower: 10,
+    counterAttackPower: 10,
+    healthPoints: 80
   }
 ];
 
 const setCharacter = characterInput => {
-  let selectedCharacter = Characters.filter(
-    character => character.name === characterInput
-  );
-  console.log(selectedCharacter);
-  Char = selectedCharacter[0];
-  setState(Char);
+  const stateCheck = window.localStorage.getItem("player");
+  console.log("stateCheck", stateCheck);
+
+  if (stateCheck !== null && stateCheck !== "undefined") {
+    console.log(
+      "You've already selected a character. Call reset function to play again."
+    );
+    return;
+  } else if (stateCheck == "undefined" || stateCheck == null) {
+    let selectedCharacter = Characters.filter(
+      character => character.name === characterInput
+    );
+    Char = selectedCharacter[0];
+    setState(Char);
+  }
 };
 
 const setState = Char => {
