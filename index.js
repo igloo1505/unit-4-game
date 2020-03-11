@@ -1,33 +1,50 @@
 let Char = {};
 let gameState = {};
-const CharOne = {
-  name: "Andrew",
-  attackPower: 20,
-  counterAttackPower: 34,
-  healthPoints: 100
-};
-const Andrew = {
-  name: "The Real Andrew",
-  attackPower: 20,
-  counterAttackPower: 34,
-  healthPoints: 100
-};
-const setCharacter = character => {
-  Char = character;
+const Characters = [
+  {
+    name: "yoda",
+    attackPower: 4,
+    counterAttackPower: 22,
+    healthPoints: 150
+  },
+  {
+    name: "R2D2",
+    attackPower: 5,
+    counterAttackPower: 18,
+    healthPoints: 120
+  },
+  {
+    name: "Luke Skywalker",
+    attackPower: 8,
+    counterAttackPower: 15,
+    healthPoints: 100,
+    playing: false
+  },
+  {
+    name: "Princess Leia",
+    attackPower: 6,
+    counterAttackPower: 12,
+    healthPoints: 120
+  }
+];
+
+const setCharacter = characterInput => {
+  let selectedCharacter = Characters.filter(
+    character => character.name === characterInput
+  );
+  console.log(selectedCharacter);
+  Char = selectedCharacter[0];
   setState(Char);
 };
 
 const setState = Char => {
+  gameState.player = Char.name;
   (gameState.attackPower = Char.attackPower),
     (gameState.healthPoints = Char.healthPoints),
     (gameState.counterAttackPower = Char.counterAttackPower),
-    (gameState.player = Char.name);
-  console.log(gameState);
-  return gameState;
+    console.log(gameState);
+  setStorage(gameState);
 };
-
-// setCharacter(CharOne);
-// setState(Char);
 
 const setStorage = () => {
   window.localStorage.setItem("player", gameState.player);
