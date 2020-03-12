@@ -81,7 +81,7 @@ const setCharacter = characterInput => {
   console.log("stateCheck", stateCheck);
   if (stateCheck !== null && stateCheck !== characterInput) {
     console.log(
-      "You've already selected a character. CALL RESET FUNCTION THROUGH MODAL HERE"
+      "You've already selected a character. CALL RESET FUNCTION THROUGH MODAL HERE to clear local storage"
     );
     return;
   } else if (
@@ -137,7 +137,7 @@ const setState = Char => {
   console.log(gameState);
   console.log(window.location.href);
   if (window.location.href.includes("choose")) {
-    window.location.href = "/play.html";
+    window.location.href = "./play.html";
   }
   setStorage(gameState);
 };

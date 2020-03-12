@@ -33,6 +33,8 @@ body {
 
 .playContainer {
   display: grid;
+  width: 90vw;
+  margin: auto;
   grid-template-columns: repeat(4, 1fr);
   grid-template-areas: "Player . op op op";
 }
