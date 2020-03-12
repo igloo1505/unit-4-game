@@ -69,9 +69,9 @@ const setOpponents = Char => {
     let randomNum = Math.floor(Math.random() * allButMe.length);
     console.log("randomNum", randomNum);
     let ToString = JSON.stringify(allButMe[randomNum]);
-    window.localStorage.setItem(`opponent ${i}`, ToString);
+    window.localStorage.setItem(`opponent${i}`, ToString);
     opponentArray.push(allButMe[randomNum]);
-    allButMe.splice(allButMe[randomNum], 1);
+    allButMe.splice(randomNum, 1);
   }
   console.log(opponentArray);
 };
@@ -99,6 +99,7 @@ const setCharacter = characterInput => {
 };
 
 const setDisplay = () => {
+  // debugger;
   if (window.location.href.includes("choose")) {
     YodaPoints.innerHTML = Characters[0].healthPoints;
     LukePoints.innerHTML = Characters[1].healthPoints;
@@ -114,15 +115,15 @@ const setDisplay = () => {
     playerCounterAttack.innerHTML = window.localStorage.getItem(
       "counterAttackPower"
     );
-
-    // let opponent = opponentArray[0];
-    // console.log(opponent);
-    // document
-    //   .getElementById("opponentCard0")
-    //   .setAttribute("src", opponent.image);
-
-    // !!! for loop to output opponent array to html
-    // for (var i = 0; i < opponentArray.length; i++) {}
+    for (var i = 0; i < 3; i++) {
+      const parsed = JSON.parse(window.localStorage.getItem(`opponent${i}`));
+      document
+        .getElementById(`opponentCard${i}`)
+        .setAttribute("src", parsed.image);
+      document.getElementById(`opponentPoints${i}`).innerHTML =
+        parsed.healthPoints;
+      document.getElementById(`opponentTitle${i}`).innerHTML = parsed.name;
+    }
   }
 };
 setDisplay();
@@ -152,6 +153,17 @@ const setStorage = () => {
   window.localStorage.setItem("image", gameState.image);
 };
 // setStorage();
+const setBattle = opponent => {
+  console.log(opponent);
+  let parsed = parseInt(opponent);
+  let ops = [0, 1, 2];
+  document.getElementById(`cardOp${parsed}`).classList.add("cardBattle");
+  opsFiltered = ops.filter(o => o !== parsed);
+  console.log(opsFiltered);
+  for (var i = 0; i < opsFiltered.length; i++) {
+    document.getElementById(`cardOp${opsFiltered[i]}`).classList.add("hide");
+  }
+};
 
 let x = window.localStorage.getItem("player");
 console.log("x", x);
