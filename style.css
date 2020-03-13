@@ -128,37 +128,6 @@ body {
 
 }
 
-@media only screen and (max-width: 1200px) {
-  .playContainer {
-    display: flex;
-
-  }
-
-  body {
-    overflow: auto;
-  }
-
-  .points {
-    display: block;
-  }
-
-  .card-title {
-    display: block;
-  }
-
-  .cardSelect img {
-    max-width: 120px;
-    object-fit: contain;
-  }
-
-  .cardPlayPage {
-    display: block
-  }
-
-}
-
-
-
 
 .card-title {
   font-size: 1.2rem;
@@ -225,4 +194,114 @@ body {
 
 button {
   margin: 20px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .playContainer {
+    display: flex;
+    max-width: fit-content;
+    margin: auto;
+    grid-template-columns: 2fr, 2fr;
+    grid-template-areas: "Player op""op op";
+  }
+
+  /* .card {
+    margin: auto;
+  } */
+
+  .textholder {
+    margin-top: 10px;
+    /* font-size: 0.8rem; */
+  }
+
+  body {
+    overflow: auto;
+  }
+
+  .points {
+    display: block;
+  }
+
+  .card-title {
+    display: block;
+
+  }
+
+  .cardText {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .cardSelect img {
+    width: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .cardPlayPage {
+    display: block
+  }
+
+}
+
+@media only screen and (max-width: 900px) {
+
+  #playerTitle {
+    display: block;
+    margin: 5px;
+    font-size: 1rem;
+  }
+
+  #opponentTitle0,
+  #opponentTitle1,
+  #opponentTitle2 {
+    display: block;
+    margin: 5px;
+    font-size: 1rem;
+  }
+
+  #opponentPoints0,
+  #opponentPoints1,
+  #opponentPoints2 {
+    /* display: block; */
+    margin: 5px;
+    font-size: 0.8rem;
+  }
+
+  ;
+
+
+
+  .textholder {
+    margin: 5px;
+    font-size: 0.8rem;
+  }
+
+  #playerPoints,
+  #playerAttackPower,
+  #playerCounterAttackPower {
+    margin: 10px;
+    font-size: 0.8rem;
+    /* padding-top: 5px; */
+  }
+
+  .cardText {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .playContainer {
+    display: grid;
+    width: 90vw;
+    margin: auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "Player""op""op""op";
+  }
+
+  .card {
+    margin: auto;
+  }
 }

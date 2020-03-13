@@ -64,6 +64,11 @@ const Characters = [
 ];
 let opponentArray = [];
 
+const resetGame = () => {
+  window.localStorage.clear();
+  window.location.href = "./index.html";
+};
+
 const setOpponents = Char => {
   console.log("Char", Char);
   const allButMe = Characters.filter(character => character.name !== Char.name);
@@ -84,9 +89,13 @@ const setCharacter = characterInput => {
   const stateCheck = window.localStorage.getItem("player");
   console.log("stateCheck", stateCheck);
   if (stateCheck !== null && stateCheck !== characterInput) {
-    console.log(
-      "You've already selected a character. CALL RESET FUNCTION THROUGH MODAL HERE to clear local storage"
+    let x = confirm(
+      "You've already selected a character. Would you like to reset?"
     );
+    if (x) {
+      resetGame();
+    }
+    console.log(x);
     return;
   } else if (
     stateCheck == undefined ||
@@ -211,7 +220,9 @@ fightButton.addEventListener("click", () => {
   );
   opponent.healthPoints = opponent.healthPoints - attackPower;
   attackPower = attackPower + originalAttackPower;
-  healthPoints = healthPoints - opponent.counterAttackPower;
+  if (opponent.healthPoints > 0) {
+    healthPoints = healthPoints - opponent.counterAttackPower;
+  }
   if (healthPoints <= 0) {
     alert("You Lose. Try again.");
     resetGame();
@@ -237,11 +248,12 @@ fightButton.addEventListener("click", () => {
   window.localStorage.setItem("healthPoints", healthPoints);
   setDisplay();
 });
-const resetGame = () => {
-  window.localStorage.clear();
-  window.location.href = "./index.html";
-};
 
 document.getElementById("resetGame").addEventListener("click", () => {
   resetGame();
 });
+
+// let wit = window.innerWidth;
+// if (wit < 800) {
+//   alert("Yes, I realize this is not responsive. These cards are a struggle.");
+// }
