@@ -12,7 +12,9 @@ const playerCounterAttack = document.getElementById("playerCounterAttack");
 const playerAttack = document.getElementById("playerAttackPower");
 const chooseAnother = document.getElementById("chooseAnother");
 const fightButton = document.getElementById("fightButton");
+const resetButton = document.getElementById("resetGame");
 
+let winCount = 0;
 let Char = {};
 let gameState = {};
 const Characters = [
@@ -179,6 +181,7 @@ const setBattle = opponent => {
   }
   fightButton.classList.remove("hide");
   chooseAnother.classList.remove("hide");
+  resetButton.classList.add("hide");
 };
 
 document.getElementById("chooseAnother").addEventListener("click", () => {
@@ -192,11 +195,14 @@ document.getElementById("chooseAnother").addEventListener("click", () => {
   }
   fightButton.classList.add("hide");
   chooseAnother.classList.add("hide");
+  resetButton.classList.remove("hide");
   temporaryOpponentStore = {};
   temporaryOpponentIndex = -1;
 });
 
 fightButton.addEventListener("click", () => {
+  console.log("ADD OPPONENT HEALTH QUERY AT LINE 200 AND HIDE OPPONENT IF 0");
+  // hide opponent if health is less than zero, also add 'defeated' counter, and if equal to 3, alert of win
   let opponent = temporaryOpponentStore;
   console.log(opponent);
   let attackPower = parseInt(window.localStorage.getItem("attackPower"));
@@ -205,10 +211,29 @@ fightButton.addEventListener("click", () => {
   );
   opponent.healthPoints = opponent.healthPoints - attackPower;
   attackPower = attackPower + originalAttackPower;
-  console.log(temporaryOpponentIndex);
-  window.localStorage.setItem(`opponent${temporaryOpponentIndex}`, opponent);
+  if (opponent.healthPoints <= 0) {
+    document
+      .getElementById(`cardOp${temporaryOpponentIndex}`)
+      .classList.add("defeated");
+    fightButton.classList.add("hide");
+    winCount = winCount + 1;
+    console.log(winCount);
+    if (winCount >= 3) {
+      alert("add bootstrap alert for win here(line 218)");
+    }
+  }
+  let opponentAsString = JSON.stringify(opponent);
+  window.localStorage.setItem(
+    `opponent${temporaryOpponentIndex}`,
+    opponentAsString
+  );
   window.localStorage.setItem("attackPower", attackPower);
   setDisplay();
+});
+
+document.getElementById("resetGame").addEventListener("click", () => {
+  window.localStorage.clear();
+  window.location.href = "./index.html";
 });
 
 let x = window.localStorage.getItem("player");

@@ -16,6 +16,7 @@ body {
   background-image: url("./assets/background.png");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100vh;
   background-attachment: fixed;
   background-position: bottom;
 }
@@ -75,6 +76,13 @@ body {
   color: #fff;
 }
 
+#resetGame {
+  margin-top: 100px;
+  bottom: 20px;
+}
+
+
+
 .btn:hover {
   opacity: 0.8;
 }
@@ -109,10 +117,7 @@ body {
   grid-area: Player;
 }
 
-.card:hover {
-  transition: 0.2s;
-  transform: scale(1.1);
-}
+
 
 .cardSelect img {
   max-width: 200px;
@@ -150,8 +155,17 @@ body {
   font-size: 1.5rem;
 }
 
+#playerSelected:hover {
+  transform: scale(1);
+}
+
 .cardOpponent {
   transform: scale(0.9);
+}
+
+.card:hover {
+  transition: 0.2s;
+  transform: scale(1.1);
 }
 
 .cardBattle {
@@ -163,9 +177,14 @@ body {
   display: none;
 }
 
+.defeated {
+  display: none;
+}
+
 .buttonContainer {
   max-width: min(80%, 400px);
-  margin: 50px auto;
+  margin: 50px auto 0px auto;
+
 }
 
 button {
