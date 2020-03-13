@@ -10,6 +10,8 @@ const playerPoints = document.getElementById("playerPoints");
 const playerTitle = document.getElementById("playerTitle");
 const playerCounterAttack = document.getElementById("playerCounterAttack");
 const playerAttack = document.getElementById("playerAttackPower");
+const chooseAnother = document.getElementById("chooseAnother");
+const fightButton = document.getElementById("fightButton");
 
 let Char = {};
 let gameState = {};
@@ -145,6 +147,7 @@ const setState = Char => {
 const setStorage = () => {
   window.localStorage.setItem("player", gameState.player);
   window.localStorage.setItem("attackPower", gameState.attackPower);
+  window.localStorage.setItem("originalAttackPower", gameState.attackPower);
   window.localStorage.setItem(
     "counterAttackPower",
     gameState.counterAttackPower
@@ -153,17 +156,60 @@ const setStorage = () => {
   window.localStorage.setItem("image", gameState.image);
 };
 // setStorage();
+let temporaryOpponentStore = {};
+let temporaryOpponentIndex = -1;
 const setBattle = opponent => {
   console.log(opponent);
   let parsed = parseInt(opponent);
+  temporaryOpponentIndex = parsed;
+  let fromStorage = JSON.parse(
+    window.localStorage.getItem(`opponent${parsed}`)
+  );
+  console.log(fromStorage);
+  temporaryOpponentStore = fromStorage;
+
   let ops = [0, 1, 2];
-  document.getElementById(`cardOp${parsed}`).classList.add("cardBattle");
+  let em = document.getElementById(`cardOp${parsed}`);
+  em.classList.add("cardBattle");
+
   opsFiltered = ops.filter(o => o !== parsed);
   console.log(opsFiltered);
   for (var i = 0; i < opsFiltered.length; i++) {
     document.getElementById(`cardOp${opsFiltered[i]}`).classList.add("hide");
   }
+  fightButton.classList.remove("hide");
+  chooseAnother.classList.remove("hide");
 };
+
+document.getElementById("chooseAnother").addEventListener("click", () => {
+  for (var i = 0; i < 3; i++) {
+    let tempEm = document.getElementById(`cardOp${i}`);
+    if (tempEm.classList.contains("hide")) {
+      tempEm.classList.remove("hide");
+    } else if (tempEm.classList.contains("cardBattle")) {
+      tempEm.classList.remove("cardBattle");
+    }
+  }
+  fightButton.classList.add("hide");
+  chooseAnother.classList.add("hide");
+  temporaryOpponentStore = {};
+  temporaryOpponentIndex = -1;
+});
+
+fightButton.addEventListener("click", () => {
+  let opponent = temporaryOpponentStore;
+  console.log(opponent);
+  let attackPower = parseInt(window.localStorage.getItem("attackPower"));
+  let originalAttackPower = parseInt(
+    window.localStorage.getItem("originalAttackPower")
+  );
+  opponent.healthPoints = opponent.healthPoints - attackPower;
+  attackPower = attackPower + originalAttackPower;
+  console.log(temporaryOpponentIndex);
+  window.localStorage.setItem(`opponent${temporaryOpponentIndex}`, opponent);
+  window.localStorage.setItem("attackPower", attackPower);
+  setDisplay();
+});
 
 let x = window.localStorage.getItem("player");
 console.log("x", x);

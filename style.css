@@ -39,6 +39,9 @@ body {
   grid-template-areas: "Player . op op op";
 }
 
+/* !!! Add Media Query to change grid layout */
+/* @media  */
+
 .btn {
   display: inline-block;
   background: var(--light-color);
@@ -151,15 +154,20 @@ body {
   transform: scale(0.9);
 }
 
-.cardOpponent:hover {
-  transition: 0.2s;
-  transform: scale(1);
-}
-
 .cardBattle {
-  transform: scale(1.2)
+  transform: scale(1.1);
+  transform: translateY(30px);
 }
 
 .hide {
   display: none;
+}
+
+.buttonContainer {
+  max-width: min(80%, 400px);
+  margin: 50px auto;
+}
+
+button {
+  margin: 20px;
 }
