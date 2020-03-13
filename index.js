@@ -97,6 +97,8 @@ const setCharacter = characterInput => {
       character => character.name === characterInput
     );
     Char = selectedCharacter[0];
+    // document.getElementById("welcomeName").innerHTML =
+    //   selectedCharacter[0].name;
     setOpponents(Char);
     setState(Char);
   }
@@ -201,16 +203,19 @@ document.getElementById("chooseAnother").addEventListener("click", () => {
 });
 
 fightButton.addEventListener("click", () => {
-  console.log("ADD OPPONENT HEALTH QUERY AT LINE 200 AND HIDE OPPONENT IF 0");
-  // hide opponent if health is less than zero, also add 'defeated' counter, and if equal to 3, alert of win
   let opponent = temporaryOpponentStore;
-  console.log(opponent);
+  let healthPoints = parseInt(window.localStorage.getItem("healthPoints"));
   let attackPower = parseInt(window.localStorage.getItem("attackPower"));
   let originalAttackPower = parseInt(
     window.localStorage.getItem("originalAttackPower")
   );
   opponent.healthPoints = opponent.healthPoints - attackPower;
   attackPower = attackPower + originalAttackPower;
+  healthPoints = healthPoints - opponent.counterAttackPower;
+  if (healthPoints <= 0) {
+    alert("You Lose. Try again.");
+    resetGame();
+  }
   if (opponent.healthPoints <= 0) {
     document
       .getElementById(`cardOp${temporaryOpponentIndex}`)
@@ -219,7 +224,8 @@ fightButton.addEventListener("click", () => {
     winCount = winCount + 1;
     console.log(winCount);
     if (winCount >= 3) {
-      alert("add bootstrap alert for win here(line 218)");
+      alert("Amazing. May the force be with you.");
+      resetGame();
     }
   }
   let opponentAsString = JSON.stringify(opponent);
@@ -228,13 +234,14 @@ fightButton.addEventListener("click", () => {
     opponentAsString
   );
   window.localStorage.setItem("attackPower", attackPower);
+  window.localStorage.setItem("healthPoints", healthPoints);
   setDisplay();
 });
-
-document.getElementById("resetGame").addEventListener("click", () => {
+const resetGame = () => {
   window.localStorage.clear();
   window.location.href = "./index.html";
-});
+};
 
-let x = window.localStorage.getItem("player");
-console.log("x", x);
+document.getElementById("resetGame").addEventListener("click", () => {
+  resetGame();
+});

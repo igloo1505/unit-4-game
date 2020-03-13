@@ -19,6 +19,7 @@ body {
   min-height: 100vh;
   background-attachment: fixed;
   background-position: bottom;
+  overflow: hidden;
 }
 
 .container {
@@ -40,8 +41,6 @@ body {
   grid-template-areas: "Player . op op op";
 }
 
-/* !!! Add Media Query to change grid layout */
-/* @media  */
 
 .btn {
   display: inline-block;
@@ -109,6 +108,12 @@ body {
     "description";
 }
 
+#welcomeText {
+  margin-top: 20px;
+  color: #fff;
+  text-align: center;
+}
+
 .cardSelect {
   width: fit-content;
 }
@@ -117,12 +122,43 @@ body {
   grid-area: Player;
 }
 
-
-
 .cardSelect img {
   max-width: 200px;
   object-fit: contain;
+
 }
+
+@media only screen and (max-width: 1200px) {
+  .playContainer {
+    display: flex;
+
+  }
+
+  body {
+    overflow: auto;
+  }
+
+  .points {
+    display: block;
+  }
+
+  .card-title {
+    display: block;
+  }
+
+  .cardSelect img {
+    max-width: 120px;
+    object-fit: contain;
+  }
+
+  .cardPlayPage {
+    display: block
+  }
+
+}
+
+
+
 
 .card-title {
   font-size: 1.2rem;
