@@ -206,9 +206,17 @@ button {
     grid-template-areas: "Player op""op op";
   }
 
-  /* .card {
+  .cardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    width: fit-content;
+    max-width: 90%;
     margin: auto;
-  } */
+    margin-top: 30px;
+  }
+
+
 
   .textholder {
     margin-top: 10px;
@@ -270,7 +278,28 @@ button {
     font-size: 0.8rem;
   }
 
-  ;
+  .playContainer {
+    display: grid;
+    width: 90vw;
+    margin: auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "Player""op""op""op";
+  }
+
+  .card {
+    margin: auto;
+  }
+
+  .cardContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    width: fit-content;
+    max-width: 90%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 
 
 
@@ -289,19 +318,5 @@ button {
 
   .cardText {
     margin-top: 10px;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .playContainer {
-    display: grid;
-    width: 90vw;
-    margin: auto;
-    grid-template-columns: 1fr;
-    grid-template-areas: "Player""op""op""op";
-  }
-
-  .card {
-    margin: auto;
   }
 }
