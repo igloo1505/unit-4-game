@@ -11,6 +11,18 @@
 </head>
 
 <body>
+    <!-- <div class="alert alert-success alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+        <strong>Amazing</strong> May the force be with you.
+        
+      </div> -->
+      <div class="hide" id="successAlert" role="alert">
+        Awesome. May the force be with you.
+      </div>
+      <div class="hide" id="failAlert" role="alert">
+        I feel a disturbance in the force. Try again.
+      </div>
     <h1 id="welcomeText">Welcome <span id="welcomeName"></span></h1>
     <div class="playContainer">
         <div class="card cardSelect cardPlayPage">
@@ -40,13 +52,7 @@
                     Health Points:
                     <span id="opponentPoints0"></span>
                 </div>
-                <!-- <div class="textholder">
-            Attack:
-            <span id="opponentAttackPower0"></span>
-          </div> -->
-                <!-- <div class="textholder">
-            Counter Attack:
-            <!-- <span id="opponentCounterAttack0"></span> -->
+              
             </div>
         </div>
         <div class="card cardSelect cardOpponent" id="cardOp1" onclick="setBattle('1')">
@@ -57,13 +63,7 @@
                     Health Points:
                     <span id="opponentPoints1"></span>
                 </div>
-                <!-- <div class="textholder">
-                Attack:
-                <span id="opponentAttackPower0"></span>
-              </div> -->
-                <!-- <div class="textholder">
-                Counter Attack:
-                <!-- <span id="opponentCounterAttack0"></span> -->
+            
             </div>
         </div>
         <div class="card cardSelect cardOpponent" id="cardOp2" onclick="setBattle('2')">
@@ -74,13 +74,7 @@
                     Health Points:
                     <span id="opponentPoints2"></span>
                 </div>
-                <!-- <div class="textholder">
-                    Attack:
-                    <span id="opponentAttackPower0"></span>
-                  </div> -->
-                <!-- <div class="textholder">
-                    Counter Attack:
-                    <!-- <span id="opponentCounterAttack0"></span> -->
+        
             </div>
         </div>
     </div>

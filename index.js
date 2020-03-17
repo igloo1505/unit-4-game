@@ -13,6 +13,8 @@ const playerAttack = document.getElementById("playerAttackPower");
 const chooseAnother = document.getElementById("chooseAnother");
 const fightButton = document.getElementById("fightButton");
 const resetButton = document.getElementById("resetGame");
+const successAlert = document.getElementById("successAlert");
+const failAlert = document.getElementById("failAlert");
 
 let winCount = 0;
 let Char = {};
@@ -156,6 +158,20 @@ const setState = Char => {
   }
   setStorage(gameState);
 };
+const resetAlerts = id => {
+  let activeAlert = document.getElementById(id);
+  activeAlert.classList.remove("alert");
+  activeAlert.classList.remove("fade");
+  activeAlert.classList.remove("show");
+  if (activeAlert.classList.contains("alert-danger")) {
+    activeAlert.classList.remove("alert-danger");
+  }
+  if (activeAlert.classList.contains("alert-success")) {
+    activeAlert.classList.remove("alert-success");
+  }
+  activeAlert.classList.add("hide");
+  resetGame();
+};
 
 const setStorage = () => {
   window.localStorage.setItem("player", gameState.player);
@@ -224,8 +240,14 @@ fightButton.addEventListener("click", () => {
     healthPoints = healthPoints - opponent.counterAttackPower;
   }
   if (healthPoints <= 0) {
-    alert("You Lose. Try again.");
-    resetGame();
+    failAlert.classList.remove("hide");
+    failAlert.classList.add("alert");
+    failAlert.classList.add("alert-danger");
+    failAlert.classList.add("fade");
+    failAlert.classList.add("show");
+    setTimeout(() => {
+      resetAlerts("failAlert");
+    }, 5000);
   }
   if (opponent.healthPoints <= 0) {
     document
@@ -235,8 +257,14 @@ fightButton.addEventListener("click", () => {
     winCount = winCount + 1;
     console.log(winCount);
     if (winCount >= 3) {
-      alert("Amazing. May the force be with you.");
-      resetGame();
+      successAlert.classList.remove("hide");
+      successAlert.classList.add("alert");
+      successAlert.classList.add("alert-success");
+      successAlert.classList.add("fade");
+      successAlert.classList.add("show");
+      setTimeout(() => {
+        resetAlerts("successAlert");
+      }, 5000);
     }
   }
   let opponentAsString = JSON.stringify(opponent);
